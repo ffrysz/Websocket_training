@@ -36,6 +36,7 @@ function addMessage(author, content) {
   const message = document.createElement('li');
   message.classList.add('message', 'message--received');
   if (author === userName) message.classList.add('message--self');
+  if (author === "Chat bot") message.classList.add('message--bot');
   const header = `<h3 class="message__author">${author === userName ? 'You' : author}</h3>`;
   const text = `<div class="message__content">${content}</div>`;
   message.innerHTML = header + text;

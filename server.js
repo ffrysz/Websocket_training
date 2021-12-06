@@ -26,6 +26,10 @@ io.on('connection', (socket) => {
     }
     users.push(data);
     console.log(`${author} has joined the chat!`);
+    socket.broadcast.emit('message', {
+      author: 'Chat bot',
+      content: `${author} has joined the conversation!`,
+    });
   });
   socket.on('message', (message) => {
     console.log('Oh, I\'ve got something from ' + socket.id);
@@ -35,6 +39,11 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     const removedIndex = users.findIndex((el) => {
       return el.id == socket.id;
+    });
+    const leavingName = users[removedIndex].name;
+    socket.broadcast.emit('message', {
+      author: 'Chat bot',
+      content: `${leavingName} has left the conversation... :( !`,
     });
     users.splice(removedIndex, 1);
     console.log('Oh, socket ' + socket.id + ' has left');
