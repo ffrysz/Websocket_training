@@ -21,7 +21,7 @@ function login(event) {
 
 function sendMessage(e) {
   e.preventDefault();
-  if (messageContentInput) {
+  if (messageContentInput.value) {
     addMessage(userName, messageContentInput.value);
     messageContentInput.value = '';
   } else alert('Please type your message first');
@@ -34,5 +34,6 @@ function addMessage(author, content) {
   const header = `<h3 class="message__author">${author === userName ? 'You' : author}</h3>`;
   const text = `<div class="message__content">${content}</div>`;
   message.innerHTML = header + text;
+  messagesList.appendChild(message);
   console.log(message);
 }
