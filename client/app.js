@@ -17,6 +17,7 @@ function login(event) {
   event.preventDefault();
   if (userNameInput.value) {
     userName = userNameInput.value;
+    socket.emit('login', { author: userName });
     loginForm.classList.remove('show');
     messagesSection.classList.add('show');
   } else alert('Input your name first!');
